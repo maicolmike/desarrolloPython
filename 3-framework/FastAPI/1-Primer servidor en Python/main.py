@@ -5,7 +5,7 @@ def application(env, start_response):
     
     start_response('200 OK', headers)
     
-    return ['Hola mundo desde el servidor'.encode('uft-8')]
+    return ['Hola mundo desde el servidor'.encode('utf-8')]
 
 server = make_server('localhost', 8000, application)
 server.serve_forever()
