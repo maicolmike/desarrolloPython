@@ -1,0 +1,4 @@
+def cantidad_vueltas_cierra(c):
+  c = a**2
+  return squrt(c+c)
+  print(cantidad_vueltas_cierra(4))
