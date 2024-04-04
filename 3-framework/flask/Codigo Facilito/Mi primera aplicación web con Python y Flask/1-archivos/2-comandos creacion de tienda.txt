@@ -1,0 +1,28 @@
+paso 1
+pip install virtualenv
+
+python.exe -m pip install --upgrade pip
+
+virtualenv -p python env
+.\env\Scripts\activate
+deactivate
+
+paso 2
+desde la ruta principal
+C:\Users\maicol\Documents\programacion\pythom\tienda
+
+pip install flask
+python -m pip install --upgrade pip
+pip install flask-script
+
+python manage.py runserver
+
+pip install Flask-WTF
+pip list
+// si sale error ir al archivo que indica el error comentariarlo y poner
+from flask_script._compat import text_type
+
+pip install mysqlclient flask-mysql flask-mysqldb
+pip install flask-login
+pip install flask-mail python-decouple python-dotenv
+pip uninstall python-decouple

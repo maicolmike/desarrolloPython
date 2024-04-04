@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ title }} {% endblock%}
+
+{% block content %} 
+
+{% from "_macro.html" import render_field %}
+
+<div class="container mt-3">
+  <h1>Reviews</h1>
+  {% if comments %}
+    {% for comment in comments.items %}
+      <!--  <p> {{ comment.id }} </p> -->
+        <p> {{ comment.text }} </p>
+    {% endfor %}
+  {% endif %}
+</div>
+<!-- -->
+  <br>
+{% endblock %}

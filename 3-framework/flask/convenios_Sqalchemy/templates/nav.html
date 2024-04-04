@@ -1,0 +1,35 @@
+<a class="navbar-brand" href="{{url_for('index')}}"><img src="{{ url_for('static', filename='img/logoCootep.png' ) }}" width="250" height="" alt="COOTEP LTDA" title="COOTEP LTDA"></a>
+
+<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="navbar-brand" href="{{url_for('index')}}">Inicio</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar"></div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('consultar')}}">Consultar asociado</a>
+      </li>
+    <!--    -->
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('create')}}">Crear usuario</a>
+      </li>
+     <!--    -->
+    </ul>
+    <span class="navbar-nav">
+          <!-- Tomar usuario actual-->
+          <span class="navbar-nav">
+            {% if dataTipousuario == 1 %}
+            <h5 style="color:white">{{ username }} ( Administrador )</h5>
+            {% else %}
+            <h5 style="color:white">{{ username }} ( Cliente )</h5>
+            {% endif %}
+          
+          </span>
+      <strong ><a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesion</a></strong>
+    </span>
+  </div>
+</nav>

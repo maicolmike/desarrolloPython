@@ -1,0 +1,61 @@
+{% extends './body.html' %}  <!-- para que tome el contenido del menu nav.html -->
+{% block title %} {{ title }} {% endblock%}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/update.css')}}">
+{% endblock %}
+
+<!-- inicio del contenido-->
+{% block content %}
+{% from "_macro.html" import render_field %}  <!-- para que funcione el formulario donde se pone {{ render_field(form.usuario, class='form-control' , placeholder='Usuario', minlength='4', maxlength='20') }}-->
+
+<!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+   <br />
+    {% for category, message in messages %}
+        {% if category == 'warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<!-- fin codigo para enviar mensaje de alerta-->
+
+  <div class="container mt-3">
+
+    <h3>Cambiar contraseña</h3>
+
+    <form class="form-update" name="sentMessage" id="contactForm" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      
+      <div class="mb-3 mt-3">
+        {{ render_field(form.usuario, class='form-control' , placeholder='Contraseña actual', minlength='4', maxlength='20') }}
+      </div>
+
+      <div class="mb-3 mt-3">
+        {{ render_field(form.passwordNew, class='form-control' , placeholder='Contraseña nueva') }}
+      </div>
+
+      <div class="mb-3 mt-3">
+        {{ render_field(form.passwordNewConfirmation, class='form-control' , placeholder='Confirmar Contraseña') }}
+      </div>
+
+      <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
+    </form>
+  </div>
+  <br>
+{% endblock %}
+<!-- Fin del contenido-->

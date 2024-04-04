@@ -1,0 +1,116 @@
+tecla visual code
+contrl + shift + f
+alt + shift + f
+
+teclas navegador
+recarge la pagina desde el servidor
+control + F5
+control + mayusculas + R
+
+ls /usr/bin/python*
+
+python --version
+python3 --version
+sudo apt-get remove python3.5
+sudo apt-get remove --auto-remove python3.5
+pip --version
+pip list
+pip install virtualenv
+python.exe -m pip install --upgrade pip
+python -m pip install --upgrade pip
+virtualenv -p python env
+sudo apt install python3-virtualenv
+.\env\Scripts\activate
+deactivate
+pip install flask
+python .\app\app.py
+pip install flask-script
+python manage.py runserver
+pip install Flask-WTF
+pip install flask-mail python-decouple python-dotenv
+pip install cx_Oracle
+#si genera error por la conexion oracle debemos comentariar connectionOracle=DevelopmentConfig.connection y en config.py tambien
+python 1-holaMundo.py
+python 12-validacionFormulario/main.py
+pip install validators
+pip install email_validator
+pip install Flask-Bcrypt
+pip install Flask-SQLAlchemy
+pip install Flask Flask-Login Flask-Bcrypt Flask-WTF FLask-Migrate Flask-SQLAlchemy Flask-Testing python-decouple
+
+
+*****creacion de una tienda****************************************************
+paso 1
+pip install virtualenv
+
+python.exe -m pip install --upgrade pip
+
+virtualenv -p python env
+.\env\Scripts\activate
+deactivate
+
+paso 2
+desde la ruta principal
+C:\Users\maicol\Documents\programacion\pythom\tienda
+
+pip install flask
+python -m pip install --upgrade pip
+pip install flask-script
+
+python manage.py runserver
+
+en linux
+python3 main.py
+
+pip install Flask-WTF
+// si sale error ir al archivo que indica el error comentariarlo y poner
+from flask_script._compat import text_type
+
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+pip install mysqlclient
+sudo apt-get install mysql-client
+pip install flask-mysqldb
+pip install flask-mysql 
+pip install flask-login
+pip install flask-mail python-decouple python-dotenv
+pip uninstall python-decouple
+*********************************************************************************
+
+
+Para instalar correctamente MySQLClient en un Ubuntu 18.04 LTS nuevo, debe instalar cada uno de los siguientes:
+
+# Replace python3.6 with which ever version of Python3 you are using
+sudo apt-get install python3.6-dev 
+sudo apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+sudo apt-get install libssl-d
+
+
+____________________
+sudo su apt update
+sudo su apt upgrade
+sudo apt install libapache2-mod-wsgi-py3
+sudo apt-get install libapache2-mod-wsgi-py3 python-dev
+sudo apt install python3-pip
+
+
+sudo nano /etc/apache2/sites-enabled/000-default.conf
+sudo service apache2 restart
+
+permisos
+sudo chown -R cootep /var/www/html
+sudo chown -R cootep /etc/apache2/sites-available/000-default.conf
+
+copiar carpeta
+pscp C:\Users\COOTEP\Downloads\desplegar-app-python-flask-vps-hostinger-master\app.py cootep@192.168.17.82:/var/www/html/flask_project
+
+
+me muestre los errores 
+ErrorLog /var/www/html/error.log
+CustomLog /var/www/html/access.log combined
+
+
+--- instalar mmysql --
+sudo apt install mysql-server
+systemctl status mysql.service
+sudo systemctl start mysql

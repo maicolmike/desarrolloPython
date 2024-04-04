@@ -1,0 +1,77 @@
+{% extends './body.html' %}  <!-- para que tome el contenido del menu nav.html -->
+{% block title %} {{ title }} {% endblock%}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/consultar.css')}}">
+{% endblock %}
+
+{% block content %} 
+{% from "_macro.html" import render_field %}  <!-- para que funcione el formulario donde se pone {{ render_field(form.usuario, class='form-control' , placeholder='Usuario', minlength='4', maxlength='20') }}-->
+
+<div class="container mt-3">
+
+    <h3>Consultar Asociado</h3>
+
+    <form class="form-consultar" name="sentMessage" id="contactForm" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      
+      <div class="visually-hidden">
+        {{ render_field(form.usuario, class='form-control' , placeholder='Digite numero de documento', minlength='4', maxlength='20') }}
+      </div>
+        
+      <button type="submit" class="btn btn-success btnEditar" style="background-color:rgb(4,105,4);">Consultar</button>
+      <br>
+
+<!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+   <br/>
+    {% for category, message in messages %}
+        {% if category == 'danger' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% elif category == 'warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<!-- fin codigo para enviar mensaje de alerta-->
+<!-- Inicio consulta que se hace en oracle -->
+  <div class="row">
+    {% for datos in data.dataConsulta %}
+    <div class="col-sm-12"><h3>Usuario</h3></div>
+    <div class="col-sm-12">{{ datos[1] }}</div>
+    <div class="col-sm-12" ><h3>Numero de documento</h3></div>
+    <div class="col-sm-12">{{ datos[0] }}</div>
+    <!-- valido que el asociado no este en moro en cuanto a aportes, credito -->
+    {% if (datos[2] == None or datos[2] <= 0) and (datos[3] == None or datos[3] <= 0) and (datos[4] == None or datos[4] <= 0) and (datos[5] == None or datos[5] <= 0)%}
+              <div class="col-sm-12"><h3>Estado</h3></div>
+              <div class="col-sm-3"><h5 style="background-color:#ffffff; color:#034e1c"><b> Activo para convenios </b></h5></div>
+              {% else %}
+              <div class="col-sm-12"><h3>Estado</h3></div>
+              <div class="col-sm-3"><h5 style="background-color:#ffffff;color:#860303"><b>No apto para convenio</b></h5></div>
+              {% endif %}
+  {% endfor %}
+  </div>
+  <!-- final consulta que se hace en oracle -->
+    </form>
+</div>
+
+{% endblock %}

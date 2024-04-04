@@ -1,0 +1,18 @@
+.usuarios table{
+    font-size: 16px;      /* para el tamaño de la letra de la tabla*/
+    max-width: 830px;     /* tamaño de la tabla a lo ancho*/
+    margin: 30px;
+    /*margin-left: 10px; */
+    /*text-align: center;  */
+  }
+
+  /* div que le cree una clase usuarios */
+  .usuarios {
+    display: flex;  /* para que me ponga los elementos en el centro */
+    justify-content: center; /* para que me ponga los elementos en el centro */
+    text-align: center;
+  }
+
+  .container {
+    text-align: center;
+  }

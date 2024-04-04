@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ title }} {% endblock%}
+
+{% block content %} 
+
+{% from "_macro.html" import render_field %}
+
+<div class="container mt-3">
+    <h1>Formulario de comentarios</h1>
+    <form name="sentMessage" id="commentForm" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
+      <div class="mb-3 mt-3 col-sm-4">
+        {{ render_field(form.comment, class='form-control') }}
+
+        {{ form.honeypot }}
+        {{ render_field(form.honeypot, class='form-control') }}
+      </div>
+        
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    
+  </div>
+  <br>
+{% endblock %}

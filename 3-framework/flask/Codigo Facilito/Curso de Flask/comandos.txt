@@ -1,0 +1,8 @@
+pip install flask
+python 1-holaMundo.py
+python 12-validacionFormulario/main.py
+pip install validators
+pip install email_validator
+pip install Flask-Bcrypt
+pip install Flask-SQLAlchemy
+pip install Flask Flask-Login Flask-Bcrypt Flask-WTF FLask-Migrate Flask-SQLAlchemy Flask-Testing python-decouple

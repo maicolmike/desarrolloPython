@@ -1,0 +1,37 @@
+python --version
+pip --version
+pip list
+pip install virtualenv
+
+python.exe -m pip install --upgrade pip
+
+virtualenv -p python env
+virtualenv -p python3 env   // con este me genero algunos errores
+.\env\Scripts\activate
+deactivate
+pip install flask
+python .\app\app.py
+
+python -m pip install --upgrade pip
+
+pip install flask-script
+python manage.py runserver
+
+pip install Flask-WTF
+pip list
+
+
+tecla visual code
+contrl + shift + f
+alt + shift + f
+
+teclas navegador
+recarge la pagina desde el servidor
+control + F5
+control + mayusculas + R
+
+
+otra forma
+pip install Flask
+
+pip install flask-mail python-decouple python-dotenv

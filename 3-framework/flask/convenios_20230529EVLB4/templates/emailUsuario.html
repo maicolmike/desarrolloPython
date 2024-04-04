@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email usuario</title>
+</head>
+<body>
+  <!-- <img src="../static/img/bancolombia.jpg"> -->  <!-- asi se lo utiliza en html normal -->
+ <!-- <img src="{{ url_for('static', filename='img/bancolombia.jpg' ) }}" alt="">    -->  <!-- asi se lo utiliza por el framework flask -->
+  <!--<img data-imagetype="External" src="https://mcusercontent.com/2b6a6efcfe5b9efe30bce5e30/images/635877c3-fda3-5358-8d52-abdb11b7634b.png" align="center" alt="" width="564" class="x_mcnImage" style="max-width:1192px; padding-bottom:0; display:inline!important; vertical-align:bottom; border:0; height:auto; outline:none; text-decoration:none"> -->
+<p>Hola casa comercial <b>{{ user }}</b> nos alegra saber que haces parte de esta gran familia Cootep.</p>
+<p>Para poder ingresar al aplicativo app convenios en donde podras consultar a los asociados que estan habilitados para poder recibir el beneficio del convenio deberas ingresar a la pagina oficial de Cootep en la pestaña convenios y dar click en la boton consulta casas comerciales</p>
+<!--<a href="http://190.255.38.53:5000/login" target="_blank">http://190.255.38.53:5000/login</a> -->
+<p>Una vez en el aplicativo deberas ingresar los siguientes datos:</p>
+<p>Usuario: <b>{{ user }}</b></p>
+<p>Clave: <b>{{ passwordTemporal }}</b></p>
+<p>Por seguridad se recomienda que una vez ingreses hagas el proceso de cambio de contraseña por una mas segura y personal</p>
+</body>
+</html>

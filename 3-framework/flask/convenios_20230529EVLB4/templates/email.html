@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email</title>
+</head>
+<body>
+  <!-- <img src="../static/img/bancolombia.jpg"> -->  <!-- asi se lo utiliza en html normal -->
+ <!-- <img src="{{ url_for('static', filename='img/bancolombia.jpg' ) }}" alt="">    -->  <!-- asi se lo utiliza por el framework flask -->
+  <!--<img data-imagetype="External" src="https://mcusercontent.com/2b6a6efcfe5b9efe30bce5e30/images/635877c3-fda3-5358-8d52-abdb11b7634b.png" align="center" alt="" width="564" class="x_mcnImage" style="max-width:1192px; padding-bottom:0; display:inline!important; vertical-align:bottom; border:0; height:auto; outline:none; text-decoration:none"> -->
+<p>Hola <b>{{ user }}</b> hemos recibido una solicitud de recuperarcion de clave por favor ingrese con los siguientes datos generados de forma automática.</p>
+<p>Usuario: <b>{{ user }}</b></p>
+<p>Nueva Clave: <b>{{ passwordTemporal }}</b></p>
+<p>Por seguridad se le recomienda que haga el proceso de cambio de clave por una personal y con las medidas de seguridad necesarias</p>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends './body.html' %} <!--para que tome el contenido del menu nav.html -->
+{% block title %} {{ title }} {% endblock%}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% from "_macro.html" import render_field %}
+
+{% block content %}
+<!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages() %}
+{%if messages %}
+  {%for message in messages %}
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{ message }}</strong>
+      </div>
+  {%endfor %}
+{% endif %}
+
+{% endwith %}
+
+<h1>App Convenios</h1>
+<!-- -->
+  <br>
+{% endblock %}

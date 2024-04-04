@@ -1,0 +1,161 @@
+{% extends './body.html' %} <!-- para que tome el contenido del menu nav.html -->
+{% block title %} {{ title }} {% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/usuarios.css')}}">
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename='lib/sweetalert2-9.10.0/sweetalert2.all.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notificacionSwal.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='js/listado_usuarios.js') }}"></script> -->
+<!--<script src="{{ url_for('static', filename='js/listado_usuarios2.js') }}"></script> -->
+{% endblock %}
+
+<!-- INICIO-->
+{% block container %}  <!-- es un bloque que no esta en el body ni en base -->
+
+<h3>Listar usuarios</h3>
+<div class="container">  <!-- div inicial-->
+  <div class="card shadow table-responsive">
+      <div class="card-body table-responsive">
+          <!-- Tabla -->
+          <table class="table table-bordered table-hover"> <!-- table-striped-->
+            <!-- columnas de la tabla table-light thead-light table-secondary-->
+              <thead class="table-secondary">
+                  <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Usuario</th>
+                    <!--  <th scope="col">Contraseña</th> -->
+                      <th scope="col">Tipo de usuario</th>
+                      <th scope="col">Fecha y hora de creacion</th>
+                      <th scope="col">Acciones</th>
+                  </tr>
+              </thead>
+          <!-- columnas de la tabla-->
+          <tbody>
+            <!-- inicio for -->
+              {% for datos in data.dataConsulta %}
+                  <tr>
+                      <td>{{ datos[0] }}</td> <!-- id-->
+                      <td>{{ datos[1] }}</td> <!-- usuario-->
+                  <!--    <td>****</td> --> <!-- contraseña-->
+                      <!-- valido si el tipo de usuario es 1 me muestre administrador sino cliente-->
+                      {% if datos[3]==1 %}
+                      <td>Administrador</td>
+                      {% else %}
+                      <td>Cliente</td>
+                      {% endif %}
+                      <!-- valido si el tipo de usuario es 1 me muestre administrador sino cliente-->
+                      <td>{{ datos[4] }}</td> <!-- fecha y hora de creacion-->
+                      <td>
+                        <div class="row">
+                        <div class="col-sm">
+                          <button class="btn btn-primary fa-solid fa-pen" id="btn-edit{{ datos[0] }}" data-toggle="modal" data-target="#modal{{ datos[0] }}"></button> 
+                          <button class="btn btn-success fa-solid fa-lock" id="btn-cambiar{{ datos[0] }}" data-toggle="modal" data-target="#modal2{{ datos[0] }}"></button>
+                          <button href="" class="btn btn-danger fa-solid fa-trash"></button>
+                        </div>
+                      </div>
+                      </td>
+                      <!--<td><a href="" class="btn btn-danger btn-block btn-sm">Delete</a></td> -->
+                  </tr>
+
+                  <!-- modal editar-->
+
+                  <div class="modal fade" id="modal{{ datos[0] }}"> <!-- funciona con el nombre del id debe ser el mismo que tenga el boton data-target="#modal{{ datos[0] }}"-->
+                    <div class="modal-dialog modal-dialog-centered">  <!--<div class="modal-dialog modal-dialog-centered">-->
+                      <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h3 class="modal-title">Editar usuarios</h3>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/edit/{{ datos[0] }}" method="post">
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                          
+                          <div class="form-inline col-sm-12 mt-3">
+                            <label class="control-label col-sm-4" for="UserName"><h5>Usuario</h5></label>
+                            <input minlength="4" type="text" class="form-control col-sm-7" name="username" value="{{ datos[1] }}">
+                          </div>
+                    
+                          <div class="form-inline col-sm-12 mt-3">
+                            <label class="control-label col-sm-4" for="tipoUsuario"><h5>Tipo usuario</h5></label>
+                            <!--<input type="text" class="form-control col-sm-7" name="tipousuario" value="{{ datos[3] }}"> -->
+                            <select name="tipousuario" id="tipoUsuario" value="{{datos[3]}}" class="form-control col-sm-7">
+                              {% if datos[3]==1 %}
+                              <option value="1"selected>Administrador</option>
+                              <option value="2">Cliente</option>
+                              {% else %}
+                              <option value="1">Administrador</option>
+                              <option value="2"selected>Cliente</option>
+                              {% endif %}
+                            </select>
+                          </div>
+                          
+                        </div>
+                    
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- cierre modal editar-->
+
+
+                  <!-- modal cambiar contraseña-->
+
+                  <div class="modal fade" id="modal2{{ datos[0] }}"> <!-- funciona con el nombre del id debe ser el mismo que tenga el boton data-target="#modal{{ datos[0] }}"-->
+                    <div class="modal-dialog modal-dialog-centered">  <!--<div class="modal-dialog modal-dialog-centered">-->
+                      <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h3 class="modal-title">Cambiar Contraseña</h3>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <form action="/cambiar/{{ datos[0] }}" method="post">
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                          
+                          <div class="form-inline col-sm-12 mt-3">
+                            <label class="control-label col-sm-4" for="passnew" id="mi-label"><h5>Nueva contraseña</h5></label>
+                            <input minlength="4" type="password" class="form-control col-sm-7" name="passnew">
+                          </div>
+                          
+                        </div>
+                    
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- cierre modal cambiar contraseña-->
+
+              {% endfor %}
+              <!-- Final for -->
+          </tbody>
+      </table>
+<!-- final Tabla -->
+      </div>
+  </div>
+</div>  <!-- div final-->
+
+{% endblock %}

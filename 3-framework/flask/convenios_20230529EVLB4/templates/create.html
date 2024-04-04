@@ -1,0 +1,82 @@
+{% extends './body.html' %}  <!-- para que tome el contenido del menu nav.html -->
+
+{% block title %} {{ title }} {% endblock%}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css')}}">
+{% endblock %}
+
+{% block content %} 
+
+
+{% from "_macro.html" import render_field %} <!-- para que funcione el formulario donde se pone {{ render_field(form.usuario, class='form-control' , placeholder='Usuario', minlength='4', maxlength='20') }}-->
+
+<!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+   <br />
+    {% for category, message in messages %}
+        {% if category == 'warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<!-- fin codigo para enviar mensaje de alerta-->
+<div class="container mt-3">
+  {% if current_user.tipousuario.id ==1 %}   <!-- valido que el usuario que ingresa a esta ruta sea un administrador tipo= 1-->
+
+    <h3>Crear usuario</h3>
+
+    <form class="form-create" name="sentMessage" id="contactForm" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      
+      <div class="mb-3 mt-3">
+        {{ render_field(form.usuario, class='form-control', placeholder='Usuario', minlength='4', maxlength='20') }}
+      </div>
+
+      <div class="mb-3 mt-3">
+        {{ render_field(form.email, class='form-control', placeholder='Correo electronico') }}
+      </div>
+
+      <div class="mb-3 mt-3">
+        {{ render_field(form.password, class='form-control' , placeholder='Password') }}
+      </div>
+
+      <div class="mb-3 mt-3">
+        {{ render_field(form.tipousuario, class='form-control' , placeholder='Tipo usuario') }}
+      </div>
+
+      <button type="submit" class="btn btn-success" style="background-color:rgb(4,105,4);">Guardar</button>
+      <!-- evitar ataques  -->
+      <div class="mb-3 mt-3 col-sm-4">
+        {{ form.honeypot }}
+        {{ render_field(form.honeypot, class='form-control') }}
+      </div>
+      <!---->
+    </form>
+    
+  </div>
+  <br>
+
+{% else %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+<br>
+<div class="col-sm-12"><h2 style="background-color:#ffffff;color:#860303"><B>Acceso restringido</B></h2></div>
+<!--    <a class="" href="{{url_for('index')}}"><img src="{{ url_for('static', filename='img/usuarios.gif' ) }}" width="150" height="" alt="Acceso restringido" title="Acceso restringido"></a> -->
+<br>
+<div class="col-sm-12"><h5 >¡Hola!, no tienes los permisos necesarios. Si necesitas acceder a esta aplicacion, debes solicitar al administrador.</h5></div>
+<div class="col-sm-12"><h5>¡Eso es todo!, Que tengas un excelente día.</h5></div> 
+{% endif %}  <!-- aqui pongo el final del condicional para saber si el que accede es un administrador-->
+{% endblock %}

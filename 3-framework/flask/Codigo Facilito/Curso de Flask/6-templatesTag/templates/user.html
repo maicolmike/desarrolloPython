@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+</head>
+<body>
+    <H1> El usuario es :  {{ nombre }}</H1>
+    <H2> La edad es :  {{ age }}</H2>
+    <H2> La lista es :  {{ list }}</H2>
+
+    {% if age > 18 %}
+    <p> Es mayor de edad</p>
+    {% endif %}
+    
+    {% for item in list%}
+    <p>{{ item }}</p>
+    {% endfor %}
+    
+</body>
+</html>

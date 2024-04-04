@@ -1,0 +1,76 @@
+{% extends './base.html' %} <!-- para que me tome el titulo y el icono de la aplicacion-->
+
+{% block title %} {{ title }} {% endblock%} <!-- utilizar el titulo que le mando de main.py-->
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recuperarClave.css')}}">
+{% endblock %}
+
+
+
+{% block body %} <!-- Inicio donde Se muestra la informacion en la pantalla o en el cuerpo-->
+
+<div class="container">
+    <form action="/recuperarClave" class="formRecuperar" method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <img class="mb-4" src="{{ url_for('static', filename='img/logoCootep.png')}}" alt="" width="300">
+    <h1 class="h3 mb-3 font-weight-normal">Recuperacion de clave</h1>
+      <div class="form-group">
+        <label for="usuario"><h4>Usuario</h4></label>
+        <input type="text" class="form-control" id="usuario" placeholder="Ingresa tu usuario" name="usuario" minlength='4', maxlength='20' required>
+      </div>
+      
+     <!-- <div class="form-group">
+        <label for="email"><h4>Correo electronico</h4></label>
+        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" name="email" required>
+      </div> -->
+      <button type="submit" class="w-75 btn btn-lg btn-success"style="background-color:rgb(4,105,4);">Enviar al correo</button>
+      <br>
+
+      <!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+   <br/>
+    {% for category, message in messages %}
+        {% if category == 'danger' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% elif category == 'warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<!-- fin codigo para enviar mensaje de alerta-->
+
+      <!-- Inicio pie de pagina-->
+      <footer>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                <p class="CopyRight text-muted">All Copyright <span id="anio_actual"></span> &copy; COOTEP <br> Diseñado por Ing de sistemas Maicol Yela</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Final pie de pagina-->
+    </form>
+  </div>
+
+  {% endblock %} <!-- Final donde Se muestra la informacion en la pantalla o en el cuerpo-->

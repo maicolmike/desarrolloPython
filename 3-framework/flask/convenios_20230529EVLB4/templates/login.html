@@ -1,0 +1,85 @@
+{% extends './base.html' %} <!-- para que me tome el titulo y el icono de la aplicacion-->
+
+{% block title %} {{ title }} {% endblock%}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+{% endblock %}
+
+{% from "_macro.html" import render_field %}
+
+{% block body %}
+
+<div class="container mt-3">
+
+    <form class="form-signin" id="login-form" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <img class="mb-4" src="{{ url_for('static', filename='img/logoCootep.png')}}" alt="" width="300">
+    
+        <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesi&oacute;n App</h1>
+      
+        <div class="visually-hidden">
+        {{ render_field(form.usuario, class='form-control', placeholder='Usuario', minlength='4', maxlength='20') }}
+        </div>
+
+        <div class="visually-hidden">
+            {{ render_field(form.password, class='form-control', placeholder='Password')}}
+            </div>
+        
+        <button style="background-color:rgb(4,105,4);" class="w-75 btn btn-lg btn-success" type="submit">Iniciar sesi&oacute;n</button>
+        <br><br>
+        <a class="" href="{{url_for('recuperarClave')}}">Recordar contraseña</a>
+        <br>
+        
+    <!-- codigo para enviar mensaje de alerta-->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+   <br/>
+    {% for category, message in messages %}
+        {% if category == 'danger' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% elif category == 'warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong style='font-size: 14px;'>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<!-- fin codigo para enviar mensaje de alerta-->
+
+        <footer>
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <p class="CopyRight text-muted">All Copyright <span id="anio_actual"></span> &copy; COOTEP <br> Diseñado por Ing de sistemas Maicol Yela</p>
+                </div>
+            </div>
+        </footer>  
+        
+    </form>
+    <!-- Inicio codigo js para sacar año actual-->
+    <script>
+        var anio = new Date().getFullYear();
+        document.getElementById("anio_actual").innerHTML = anio;
+    </script>
+    <!-- Final codigo js para sacar año actual-->
+</div>
+  <br>
+{% endblock %}

@@ -1,0 +1,1 @@
+proyecto base separando los modelos y hacciendolo solo con la libreria sqalshemy
