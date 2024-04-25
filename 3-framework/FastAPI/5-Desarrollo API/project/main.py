@@ -1,8 +1,12 @@
 from fastapi import FastAPI
-from database import database as connection 
+from database import database as connection
 
+from database import User
+from database import Movie
+from database import UserReview
 
-
+from schemas import UserBaseModel
+from fastapi import HTTPException 
 
 app = FastAPI(title='Proyecto peliculas',
               description='Hola esta es una muestra de como hacer apis',
@@ -14,7 +18,9 @@ def startup():
     #print('El servidor va a comenzar')
     if connection.is_closed():
         connection.connect()
-        print('Exitosa la conneccion')
+        #print('Exitosa la conneccion')
+
+    connection.create_tables([User,Movie,UserReview])
 
 @app.on_event('shutdown')
 def shutdown():
@@ -34,3 +40,18 @@ async def index():
 @app.get('/about')
 async def about():
     return 'About'
+
+@app.post('/users')
+async def create_user(user: UserBaseModel):
+
+    if User.select().where(User.username == user.username).exists():
+        return HTTPException(409,'El username ya se encuentra en uso')
+
+    hash_password = User.create_password(user.password)
+
+    user = User.create(
+        username = user.username,
+        #password = user.password
+        password = hash_password
+    )
+    return user.id
