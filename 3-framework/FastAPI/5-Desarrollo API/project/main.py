@@ -5,8 +5,9 @@ from database import User
 from database import Movie
 from database import UserReview
 
-from schemas import UserBaseModel
-from fastapi import HTTPException 
+from schemas import UserRequestModel
+from fastapi import HTTPException
+from schemas import UserResponseModel
 
 app = FastAPI(title='Proyecto peliculas',
               description='Hola esta es una muestra de como hacer apis',
@@ -40,9 +41,9 @@ async def index():
 @app.get('/about')
 async def about():
     return 'About'
-
+'''
 @app.post('/users')
-async def create_user(user: UserBaseModel):
+async def create_user(user: UserRequestModel):
 
     if User.select().where(User.username == user.username).exists():
         return HTTPException(409,'El username ya se encuentra en uso')
@@ -54,4 +55,27 @@ async def create_user(user: UserBaseModel):
         #password = user.password
         password = hash_password
     )
-    return user.id
+    #return user.id
+    return {
+        'id': user.id,
+        'username': user.username,
+        #'pass': user.password,
+        'create': user.created_at
+    }
+'''
+
+@app.post('/users',response_model = UserResponseModel)
+async def create_user(user: UserRequestModel):
+
+    if User.select().where(User.username == user.username).exists():
+        return HTTPException(409,'El username ya se encuentra en uso')
+
+    hash_password = User.create_password(user.password)
+
+    user = User.create(
+        username = user.username,
+        #password = user.password
+        password = hash_password
+    )
+    #return UserResponseModel(id= user.id, username= user.username, create= user.created_at)
+    return user
