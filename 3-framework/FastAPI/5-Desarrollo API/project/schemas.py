@@ -26,15 +26,38 @@ class PeeweeGetterDict(GetterDict):
             return list(res)
         return res  
 
+#configurar
+class ResponseModel(BaseModel):
+    
+    class Config:
+        orm_mode = True
+        getter_dict = PeeweeGetterDict
+
 #para enviar respuesta
-class UserResponseModel(BaseModel):
+class UserResponseModel(ResponseModel):
     id : int
     username : str
     #password : str
     #create: datetime
     #si serializamos utilziamos esto
     
-    class condif:
-        orm_mode = True
-        getter_dict = PeeweeGetterDict
 
+class ReviewRequestModel(BaseModel):
+    user_id: int
+    movie_id: int
+    review: str
+    score: int
+
+    @validator('score')
+    def score_validator(cls, score):
+        
+        if score < 1 or score > 5:
+            raise ValueError('El rango para score es de 1 a 5.')
+
+        return score
+
+class ReviewResponseModel(ResponseModel):
+    id: int
+    movie_id: int
+    review: str
+    score: int

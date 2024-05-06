@@ -7,7 +7,7 @@ from database import UserReview
 
 from schemas import UserRequestModel
 from fastapi import HTTPException
-from schemas import UserResponseModel
+from schemas import UserResponseModel, ReviewRequestModel,ReviewResponseModel
 
 app = FastAPI(title='Proyecto peliculas',
               description='Hola esta es una muestra de como hacer apis',
@@ -79,3 +79,14 @@ async def create_user(user: UserRequestModel):
     )
     #return UserResponseModel(id= user.id, username= user.username, create= user.created_at)
     return user
+
+@app.post('/reviews',response_model = ReviewResponseModel)
+async def create_review(user_review: ReviewRequestModel):
+    user_review = UserReview.create(
+        user_id = user_review.user_id,
+        movie_id = user_review.movie_id,
+        review = user_review.review,
+        score = user_review.score
+    )
+
+    return user_review
