@@ -9,6 +9,8 @@ from schemas import UserRequestModel
 from fastapi import HTTPException
 from schemas import UserResponseModel, ReviewRequestModel,ReviewResponseModel
 
+from typing import List
+
 app = FastAPI(title='Proyecto peliculas',
               description='Hola esta es una muestra de como hacer apis',
               version='1')
@@ -82,6 +84,13 @@ async def create_user(user: UserRequestModel):
 
 @app.post('/reviews',response_model = ReviewResponseModel)
 async def create_review(user_review: ReviewRequestModel):
+
+    if User.select().where(User.id == user_review.user_id).first() is None:
+        raise HTTPException(status_code = 404, detail = 'User not found')
+    
+    if Movie.select().where(Movie.id == user_review.movie_id).first() is None:
+        raise HTTPException(status_code = 404, detail = 'Movie not found')
+    
     user_review = UserReview.create(
         user_id = user_review.user_id,
         movie_id = user_review.movie_id,
@@ -89,4 +98,20 @@ async def create_review(user_review: ReviewRequestModel):
         score = user_review.score
     )
 
+    return user_review
+
+@app.get('/reviews', response_model = List[ReviewResponseModel])
+async def get_reviews():
+    reviews= UserReview.select() # select * from user_reviews
+
+    return [user_review for user_review in reviews]
+
+@app.get('/reviews/{review_id}', response_model = ReviewResponseModel)
+async def get_review(review_id:int):
+    #return review_id
+    user_review = UserReview.select().where(UserReview.id == review_id).first()
+
+    if user_review is None : 
+        raise HTTPException (status_code= 404, detail ='Review not found')
+    
     return user_review
