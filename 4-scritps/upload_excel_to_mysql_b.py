@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from datetime import datetime
 
 # Establecer la conexión con la base de datos MySQL de forma segura usando un contexto with
-with create_engine('mysql://root@localhost/peps2').connect() as engine:
+with create_engine('mysql://root@localhost/peps3').connect() as engine:
     # Leer el archivo Excel
     #df = pd.read_excel('/home/cootep/Downloads/peps.xlsx')
     df = pd.read_excel('/home/cootep/Downloads/familiares.xlsx')
