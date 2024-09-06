@@ -2,10 +2,10 @@
   <!-- Contenedor principal de la aplicación -->
   <div id="app">
     <!-- Imagen del logo de Vue, con una ruta relativa a la carpeta de assets -->
-    <img alt="Vue logo" src="./assets/logo.png">
+   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     
     <!-- Componente HelloWorld, se le pasa una propiedad (msg) con un mensaje -->
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
 
     <!-- Botones creados con BootstrapVue -->
     <div>
@@ -29,7 +29,7 @@
 
 <script>
 /* Importa el componente HelloWorld desde el archivo correspondiente */
-import HelloWorld from './components/HelloWorld.vue';
+//import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   /* Nombre del componente raíz de la aplicación */
@@ -37,7 +37,7 @@ export default {
 
   /* Componentes que estarán disponibles en este componente */
   components: {
-    HelloWorld  // Se registra el componente HelloWorld para usarlo en este template
+    //HelloWorld  // Se registra el componente HelloWorld para usarlo en este template
   }
 };
 </script>
