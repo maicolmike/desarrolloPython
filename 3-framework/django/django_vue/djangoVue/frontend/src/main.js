@@ -16,10 +16,16 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 // Importar BootstrapVue 3
 import BootstrapVue3 from 'bootstrap-vue-3';
 
+// Importar vue-router
+import router from './router';
+
 const app = createApp(App);
 
 // Usar BootstrapVue 3
 app.use(BootstrapVue3);
 
-app.mount('#app');
+// Usar vue-router
+app.use(router);
 
+// Montar la aplicación en el elemento con id 'app'
+app.mount('#app');
