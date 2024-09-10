@@ -10,17 +10,18 @@
     <!-- Botones creados con BootstrapVue -->
     <div>
       <!-- Botón por defecto -->
-      <b-button>Button</b-button>
+      <b-button>Button 1</b-button>
 
       <!-- Botón con variante de estilo 'danger' (rojo) -->
-      <b-button variant="danger">Button</b-button>
+      <b-button variant="danger">Button 2</b-button>
 
       <!-- Botón con variante de estilo 'success' (verde) -->
-      <b-button variant="success">Button</b-button>
+      <b-button variant="success">Button 3</b-button>
 
       <!-- Botón con estilo de contorno y color primario (azul) -->
-      <b-button variant="outline-primary">Button</b-button>
+      <b-button variant="outline-primary">Button 4</b-button>
     </div>
+    <br>
 
     <!-- Aquí se renderizarán los componentes según la ruta actual definida en el router -->
     <router-view></router-view>
