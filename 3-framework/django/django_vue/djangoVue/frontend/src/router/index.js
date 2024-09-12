@@ -23,7 +23,7 @@ const routes = [
   },
   {
     // Ruta '/books/edit' que edita los libros
-    path: '/books/edit',  // La URL para acceder a la edicion de libros
+    path: '/books/:bookId/edit',  // La URL para acceder a la edicion de libros
     name: 'EditBook',  // Nombre de la ruta
     component: EditBook  // Componente que se renderiza en esta ruta
   }
