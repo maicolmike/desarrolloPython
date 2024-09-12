@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 // Importamos los componentes que se usarán como vistas en las rutas
 import HelloWorld from '@/components/HelloWorld.vue';
 import ListBook from '@/components/Book/ListBook.vue';
+import EditBook from '@/components/Book/EditBook.vue';
 
 // Definición de las rutas de la aplicación
 // Cada objeto en el array 'routes' define una ruta particular
@@ -19,7 +20,14 @@ const routes = [
     path: '/books',  // La URL para acceder a la lista de libros
     name: 'ListBook',  // Nombre de la ruta
     component: ListBook  // Componente que se renderiza en esta ruta
+  },
+  {
+    // Ruta '/books/edit' que edita los libros
+    path: '/books/edit',  // La URL para acceder a la edicion de libros
+    name: 'EditBook',  // Nombre de la ruta
+    component: EditBook  // Componente que se renderiza en esta ruta
   }
+  
 ];
 
 // Crear una instancia del router con el historial de navegación HTML5

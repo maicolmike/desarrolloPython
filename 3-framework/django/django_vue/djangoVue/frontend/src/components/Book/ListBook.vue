@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col text-left">
+      <div class="col text-start">
         <h2>Listado de libros</h2>
         <div class="col-md-12">
           <!-- Definir la tabla con slots y campos -->
