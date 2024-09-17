@@ -10,16 +10,16 @@
     <!-- Botones creados con BootstrapVue -->
     <div>
       <!-- Botón por defecto -->
-      <b-button>Button 1</b-button>
+     <!-- <b-button>Button 1</b-button> -->
 
       <!-- Botón con variante de estilo 'danger' (rojo) -->
-      <b-button variant="danger">Button 2</b-button>
+      <!--<b-button variant="danger">Button 2</b-button> -->
 
       <!-- Botón con variante de estilo 'success' (verde) -->
-      <b-button variant="success">Button 3</b-button>
+      <!--<b-button variant="success">Button 3</b-button> -->
 
       <!-- Botón con estilo de contorno y color primario (azul) -->
-      <b-button variant="outline-primary">Button 4</b-button>
+      <!--<b-button variant="outline-primary">Button 4</b-button> -->
     </div>
     <br>
 
