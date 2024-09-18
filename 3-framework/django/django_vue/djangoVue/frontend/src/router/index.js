@@ -6,6 +6,7 @@ import HelloWorld from '@/components/HelloWorld.vue';
 import ListBook from '@/components/Book/ListBook.vue';
 import EditBook from '@/components/Book/EditBook.vue';
 import DeleteBook from '@/components/Book/DeleteBook.vue';
+import NewBook from '@/components/Book/NewBook.vue';
 
 // Definición de las rutas de la aplicación
 // Cada objeto en el array 'routes' define una ruta particular
@@ -30,9 +31,15 @@ const routes = [
   },
   {
     // Ruta '/books/delete' que elimina los libros
-    path: '/books/:bookId/delete',  // La URL para acceder a la edicion de libros
+    path: '/books/:bookId/delete',  // La URL para acceder a la eliminacion de libros
     name: 'DeleteBook',  // Nombre de la ruta
     component: DeleteBook  // Componente que se renderiza en esta ruta
+  },
+  {
+    // Ruta '/books/new' que crea libros
+    path: '/books/new',  // La URL para acceder a la creacion de libros
+    name: 'NewBook',  // Nombre de la ruta
+    component: NewBook  // Componente que se renderiza en esta ruta
   }
   
 ];

@@ -3,6 +3,9 @@
     <div class="row">
       <div class="col text-start">
         <h2>Listado de libros</h2>
+        <b-button size="sm" :to="{name: 'NewBook'}" variant="primary" style="margin-bottom: 10px;">
+            Nuevo libro
+          </b-button>
         <div class="col-md-12">
           <!-- Definir la tabla con slots y campos -->
           <b-table striped hover :items="books" :fields="fields">
