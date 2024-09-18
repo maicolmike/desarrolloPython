@@ -57,21 +57,24 @@ export default {
         }
     },
     methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
-      const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`
+        onSubmit (evt) {
+  evt.preventDefault();
+  const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`;
 
-        axios.put(path, this.form).then((response) => {
+  axios.put(path, this.form).then((response) => {
+    // Actualiza el formulario con la respuesta
+    this.form.title = response.data.title;
+    this.form.description = response.data.description;
 
-        this.form.title = response.data.title
-        this.form.description = response.data.description
-
-        //alert("Libro actualizado exitosamente")
-        swal("Libro actualizado existosamente!", "", "success")
-        })
-        .catch((error) => {
-        console.log(error)
-        })
+    // Muestra una alerta de éxito
+    swal("Libro actualizado exitosamente!", "", "success").then(() => {
+      // Redirige al listado de libros después de que se cierre la alerta
+      this.$router.push({ name: 'ListBook' });
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
     },
     getBook (){
       const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`
