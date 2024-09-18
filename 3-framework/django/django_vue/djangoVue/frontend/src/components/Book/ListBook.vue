@@ -9,11 +9,11 @@
             
             <!-- Slot para las acciones de cada fila -->
             <template v-slot:cell(action)="data">
-              <!-- Agregar la clase mr-2 para dar margen a la derecha -->
-              <b-button size="sm" variant="primary" class="" style="margin-right: 10px;" :to="{ name:'EditBook', params: {bookId: data.item.id} }">
+              <!-- Agregar en style margin-right para dar margen a la derecha -->
+              <b-button size="sm" variant="primary" style="margin-right: 10px;" :to="{ name:'EditBook', params: {bookId: data.item.id} }">
                 Editar
               </b-button>
-              <b-button size="sm" variant="danger">
+              <b-button size="sm" variant="danger" :to="{ name:'DeleteBook', params: {bookId: data.item.id} }">
                 Eliminar
               </b-button>
             </template>
