@@ -77,6 +77,7 @@ export default {
       const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`
 
       axios.get(path).then((response) => {
+        
 
         this.form.title = response.data.title
         this.form.description = response.data.description

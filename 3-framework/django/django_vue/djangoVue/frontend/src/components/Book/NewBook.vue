@@ -61,6 +61,7 @@ export default {
       const path = 'http://localhost:8000/api/v1.0/books/'
 
         axios.post(path, this.form).then((response) => {
+        location.href = '/books'  // VOLVER 
 
         this.form.title = response.data.title
         this.form.description = response.data.description
