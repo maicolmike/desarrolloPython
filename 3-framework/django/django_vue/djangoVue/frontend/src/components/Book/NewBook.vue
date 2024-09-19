@@ -56,23 +56,26 @@ export default {
         }
     },
     methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
-      const path = 'http://localhost:8000/api/v1.0/books/'
+        onSubmit (evt) {
+  evt.preventDefault()
+  const path = 'http://localhost:8000/api/v1.0/books/'
 
-        axios.post(path, this.form).then((response) => {
-        location.href = '/books'  // VOLVER 
+  axios.post(path, this.form).then((response) => {
+    // Actualizamos los datos del formulario con la respuesta
+    this.form.title = response.data.title
+    this.form.description = response.data.description
 
-        this.form.title = response.data.title
-        this.form.description = response.data.description
-
-        //alert("Libro actualizado exitosamente")
-        swal("Libro creado existosamente!", "", "success")
-        })
-        .catch((error) => {
-            swal("Libro no ha sido creado existosamente!", "", error)
-        })
-    },
+    // Muestra una alerta de éxito
+    swal("Libro creado exitosamente!", "", "success").then(() => {
+      // Cuando el usuario presiona "OK", se redirige al listado de libros
+      this.$router.push({ name: 'ListBook' });
+    });
+  })
+  .catch((error) => {
+    // Muestra una alerta de error si no se pudo crear el libro
+    swal("Libro no ha sido creado exitosamente!", "", error);
+  });
+},
  
   },
   created() {
